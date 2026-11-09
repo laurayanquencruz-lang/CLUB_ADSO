@@ -1,6 +1,7 @@
 const formulario = document.getElementById("formRegistro");
 
 formulario.addEventListener("submit", async function (event) {
+    alert("Formulario enviado"); // Mostrar un alert cuando se envía el formulario
     // Evitar recargar la página al enviar el formulario
     event.preventDefault();
 
@@ -8,7 +9,13 @@ formulario.addEventListener("submit", async function (event) {
 
     // Lee los campos del formulario y los convierte en un objeto
     const asociado = Object.fromEntries(new FormData(formulario).entries());
+    alert("Datos del asociado: " + JSON.stringify(asociado)); // Mostrar los datos en un alert
 
+    if (asociado.Contraseña !== asociado.Confirmar_Contraseña) {
+        document.getElementById("mensajeRegistro").textContent = "Las contraseñas no coinciden.";
+    }
+
+    delete asociado.Confirmar_Contraseña; // Eliminar el campo de confirmación de contraseña antes de enviarlo al servidor
     botonGuardar.disabled = true; // Deshabilitar el botón mientras se procesa la solicitud
     document.getElementById("mensajeRegistro").textContent = "Guardando...";
     document.getElementById("mensajeRegistro").dataset.tipo = "";

@@ -17,11 +17,11 @@
                 </div>
                 <div class="grupo-input">   
                     <label>Ingrese sus Nombres:</label>
-                    <input id="nombre" name="nombre" type="text" required placeholder="Ingrese sus Nombres Completos" >
+                    <input id="nombre" name="nombres" type="text" required placeholder="Ingrese sus Nombres Completos" >
                 </div>
                 <div class="grupo-input">
                     <label>Ingrese sus Apellidos:</label>
-                    <input id="apellido" name="apellido" type="text" required placeholder="Ingrese sus Apellidos Completos">
+                    <input id="apellido" name="apellidos" type="text" required placeholder="Ingrese sus Apellidos Completos">
                 </div>
                  <div class="grupo-input">
                     <label>Ingrese su Correo:</label>
@@ -57,7 +57,15 @@
                     <label>Ingrese su Teléfono:</label>
                     <input id="telefono" name="telefono" type="tel" required placeholder="Ingrese su Teléfono">
                  </div>
-                 <div class="grupo-botones">       
+                 <div class="grupo-input">
+                    <label>Ingrese su Contraseña:</label>
+                    <input id="contrasena" name="contrasena" type="password" required placeholder="Ingrese su Contraseña">
+                 </div>
+                   <div class="grupo-input">
+                     <label>Confirme su Contraseña:</label>
+                     <input id="confirmarContrasena" name="confirmarContrasena" type="password" required placeholder="Confirme su Contraseña">
+                   </div>
+                 <div class="grupo-botones">        
                     <button type="submit">Guardar</button>
                     <button type="reset">Limpiar Formulario</button>
                  </div>
@@ -65,4 +73,5 @@
             </form>
         </div>
     </body>
+<script src="../Controlador/Asociado.js"></script>
 </html>

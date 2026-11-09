@@ -23,8 +23,8 @@ if($_SERVER['REQUEST_METHOD']!=='POST')
            throw new Exception('Datos JSON inválidos.');
         }
 
-    $campos["documento", "nombres", "apellidos", "correo", "fechaNacimiento", "genero", "ciudad", "telefono"];
-    foreach($campo as $campo)
+    $campos = ["documento", "nombres", "apellidos", "correo", "fechaNacimiento", "genero","Direccion_Residencia", "ciudad", "telefono","ContraseñaHash"];
+    foreach($campos as $campo)
     {
         if(!isset($datos[$campo])){
             http_response_code(400);
