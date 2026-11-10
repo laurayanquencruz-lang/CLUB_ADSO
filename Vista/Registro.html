@@ -57,14 +57,16 @@
                     <label>Ingrese su Teléfono:</label>
                     <input id="telefono" name="telefono" type="tel" required placeholder="Ingrese su Teléfono">
                  </div>
-                 <div class="grupo-input">
-                    <label>Ingrese su Contraseña:</label>
-                    <input id="contrasena" name="contrasena" type="password" required placeholder="Ingrese su Contraseña">
-                 </div>
-                   <div class="grupo-input">
-                     <label>Confirme su Contraseña:</label>
-                     <input id="confirmarContrasena" name="confirmarContrasena" type="password" required placeholder="Confirme su Contraseña">
-                   </div>
+            <div class="grupo-input">
+    <label>Ingrese su Contraseña:</label>
+    <input id="contrasena" name="contrasena" type="password" required placeholder="Ingrese su Contraseña" minlength="8">
+    <small style="color: #666; font-size: 0.85em;">⚠️ La contraseña debe tener al menos 8 caracteres</small>
+</div>
+<div class="grupo-input">
+    <label>Confirme su Contraseña:</label>
+    <input id="confirmarContrasena" name="confirmarContrasena" type="password" required placeholder="Confirme su Contraseña" minlength="8">
+</div>
+
                  <div class="grupo-botones">        
                     <button type="submit">Guardar</button>
                     <button type="reset">Limpiar Formulario</button>
