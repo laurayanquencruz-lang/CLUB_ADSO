@@ -9,8 +9,8 @@
     <body>
         <div class="Contenedor-Formulario">   
             <h2> Registro de Asociado - Acerias</h2>
+                  <form id="formRegistro" action="../Modelo/GuardarAsociado.php" method="POST">
 
-            <form id="formRegistro" action="../Modelo/GuardarAsociado.php" method="POST">
                 <div class="grupo-input">   
                     <label>Ingresar Documento:</label>
                     <input id="documento" name="documento" type="number" placeholder="Ingrese su documento">
@@ -33,12 +33,12 @@
                  </div>
                  <div class="grupo-input">
                     <label>Genero:</label>
-                    <input radio id="genero" type="radio" name="genero" value="Masculino">
-                    <label>Masculino</label>
-                    <input radio id="genero" type="radio" name="genero" value="Femenino">
-                    <label>Femenino</label>
-                    <input radio id="genero" type="radio" name="genero" value="Otro">
-                    <label>Otro</label>
+                    <input type="radio" id="genero1" name="genero" value="Masculino">
+                    <label for="genero1">Masculino</label>
+                    <input type="radio" id="genero2" name="genero" value="Femenino">
+                    <label for="genero2">Femenino</label>
+                    <input type="radio" id="genero3" name="genero" value="Otro">
+                    <label for="genero3">Otro</label>
                  </div>
                  <div class="grupo-input">
                     <label>Ingrese su Direccion:</label>
@@ -60,7 +60,7 @@
             <div class="grupo-input">
     <label>Ingrese su Contraseña:</label>
     <input id="contrasena" name="contrasena" type="password" required placeholder="Ingrese su Contraseña" minlength="8">
-    <small style="color: #666; font-size: 0.85em;">⚠️ La contraseña debe tener al menos 8 caracteres</small>
+    <small style="color: #666; font-size: 0.85em;">La contraseña debe tener al menos 8 caracteres</small>
 </div>
 <div class="grupo-input">
     <label>Confirme su Contraseña:</label>
