@@ -1,60 +1,36 @@
-const formulario = document.getElementById("formRegistro");
+const formregistro = document.getElementById('formRegistroAsociado');
 
-formulario.addEventListener("submit", async function (event) {
-    event.preventDefault();
+formregistro.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const botonGuardar = document.querySelector('button[type="submit"]');
+    const asociado = Object.fromEntries(new FormData(formregistro).entries());
 
-    const botonGuardar = formulario.querySelector('button[type="submit"]');
-    const mensaje = document.getElementById("mensajeRegistro");
-
-    const datosFormulario = new FormData(formulario);
-    const contrasena = datosFormulario.get("contrasena");
-    const confirmarContrasena = datosFormulario.get("confirmarContrasena");
-
-    // Validaciones
-    if (contrasena.length < 8) {
-        mensaje.textContent = "⚠️ La contraseña debe tener al menos 8 caracteres.";
-        mensaje.style.color = "#e74c3c";
+    if (asociado.Contraseña !== asociado.ConfirmarContraseña) {
+        document.getElementById('mensajeRegistro').textContent = 'Las contraseñas no coinciden.';
         return;
     }
 
-    if (contrasena !== confirmarContrasena) {
-        mensaje.textContent = "⚠️ Las contraseñas no coinciden.";
-        mensaje.style.color = "#e74c3c";
-        return;
-    }
+    delete asociado.ConfirmarContraseña; // Eliminar el campo de confirmación de contraseña antes de enviar los datos
 
-    botonGuardar.disabled = true;
-    mensaje.textContent = "Guardando...";
-    mensaje.style.color = "";
-
+    botonGuardar.disabled = true; // Deshabilitar el botón de envío
+    document.getElementById('mensajeRegistro').textContent = 'Guardando...';
+    document.getElementById('mensajeRegistro').dataset.tipo = '';
     try {
-        // Enviamos los datos tal cual los lee el formulario
-        const respuesta = await fetch(formulario.action, {
-            method: "POST",
-            body: datosFormulario
-        });
+        const respuesta = await fetch(formregistro.action,{method: 'POST',headers: {'Content-Type': 'application/json'}, body: JSON.stringify(asociado)});
+        // Pasar la respuesta JSON a un objeto JavaScript
+        const resultado = await respuesta.json();
+        
+        document.getElementById('mensajeRegistro').textContent = resultado.mensaje;
 
-        const textoRespuesta = await respuesta.text(); // Lee lo que devuelve el PHP
-        console.log("Respuesta del servidor:", textoRespuesta); // Muestra en consola
-
-        try {
-            const resultado = JSON.parse(textoRespuesta);
-            mensaje.textContent = resultado.mensaje;
-            mensaje.style.color = resultado.success ? "#27ae60" : "#e74c3c";
-
-            if (respuesta.ok && resultado.success) {
-                formulario.reset();
-            }
-        } catch (e) {
-            mensaje.textContent = "El servidor devolvió un error. Revisa GuardarAsociado.php";
-            mensaje.style.color = "#e74c3c";
+        if (respuesta.ok && resultado.success) {
+            formregistro.reset(); // Limpiar el formulario si la respuesta es exitosa
         }
 
-    } catch (error) {
-        console.error("Error:", error);
-        mensaje.textContent = "Ocurrió un error al enviar. Inténtelo de nuevo.";
-        mensaje.style.color = "#e74c3c";
+    }catch (error) {
+        console.error('Error:', error);
+        document.getElementById('mensajeRegistro').textContent = 'Error al guardar los datos.';
     } finally {
-        botonGuardar.disabled = false;
+        botonGuardar.disabled = false; // Habilitar el botón de envío nuevamente
     }
+
 });

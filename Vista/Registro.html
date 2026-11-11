@@ -1,79 +1,115 @@
 <!DOCTYPE html>
-<html lang = "es">
-    <head>
-       <meta charset = "UTF-8">
-       <title> CLUB ADSO </title>
-       <link rel="stylesheet" href="../assets/css/estilos.css">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Registro de Asociados - MR CLUB</title>
+    <style>
+        body { background-color: #f8f9fa; }
+        .titulo { color: #da106b; }
+        .btn-primario { background-color: #e30e72; color: black; }
+        .btn-primario:hover { background-color: #e93bc0; color: white; }
+        .btn-secundario { background-color: #db1284; color: #222; }
+        .btn-secundario:hover { background-color: #d651ac; }
+    </style>
+</head>
+<body class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4 fw-bold titulo">Registro de Asociados</h2>
+                        
+                        <form id="formRegistroAsociado" action="../Modelo/GuardarAsociado.php" method="POST"> 
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Documento de Identidad</label>
+                                <input type="number" id="documento" name="Documento" class="form-control" required placeholder="Ej: 1058354573">
+                            </div>
 
-    </head>
-    <body>
-        <div class="Contenedor-Formulario">   
-            <h2> Registro de Asociado - Acerias</h2>
-                  <form id="formRegistro" action="../Modelo/GuardarAsociado.php" method="POST">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Nombres</label>
+                                    <input type="text" id="nombres" name="Nombre" class="form-control" required placeholder="Nombres completos">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Apellidos</label>
+                                    <input type="text" id="apellidos" name="Apellido" class="form-control" required placeholder="Apellidos completos">
+                                </div>
+                            </div>
 
-                <div class="grupo-input">   
-                    <label>Ingresar Documento:</label>
-                    <input id="documento" name="documento" type="number" placeholder="Ingrese su documento">
-                </div>
-                <div class="grupo-input">   
-                    <label>Ingrese sus Nombres:</label>
-                    <input id="nombre" name="nombres" type="text" required placeholder="Ingrese sus Nombres Completos" >
-                </div>
-                <div class="grupo-input">
-                    <label>Ingrese sus Apellidos:</label>
-                    <input id="apellido" name="apellidos" type="text" required placeholder="Ingrese sus Apellidos Completos">
-                </div>
-                 <div class="grupo-input">
-                    <label>Ingrese su Correo:</label>
-                    <input id="correo" name="correo" type="email" required placeholder="Ingrese su Correo">
-                 </div>
-                 <div class="grupo-input">
-                    <label>Ingrese Su Fecha de Nacimiento:</label>
-                    <input id="fechaNacimiento" name="fechaNacimiento" type="date" required>
-                 </div>
-                 <div class="grupo-input">
-                    <label>Genero:</label>
-                    <input type="radio" id="genero1" name="genero" value="Masculino">
-                    <label for="genero1">Masculino</label>
-                    <input type="radio" id="genero2" name="genero" value="Femenino">
-                    <label for="genero2">Femenino</label>
-                    <input type="radio" id="genero3" name="genero" value="Otro">
-                    <label for="genero3">Otro</label>
-                 </div>
-                 <div class="grupo-input">
-                    <label>Ingrese su Direccion:</label>
-                    <input id="direccion" name="direccion" type="text" required placeholder="Ingrese su Direccion">
-                 </div>
-                 <div class="grupo-input">
-                    <label>Selecciones su Ciudad:</label>
-                    <select id="ciudad" name="ciudad"
-                     required>
-                        <option value="Duitama">Duitama</option>
-                        <option value="Sogamoso">Sogamoso</option>
-                        <option value="Tunja">Tunja</option>
-                    </select>
-                 </div>
-                 <div class="grupo-input">
-                    <label>Ingrese su Teléfono:</label>
-                    <input id="telefono" name="telefono" type="tel" required placeholder="Ingrese su Teléfono">
-                 </div>
-            <div class="grupo-input">
-    <label>Ingrese su Contraseña:</label>
-    <input id="contrasena" name="contrasena" type="password" required placeholder="Ingrese su Contraseña" minlength="8">
-    <small style="color: #666; font-size: 0.85em;">La contraseña debe tener al menos 8 caracteres</small>
-</div>
-<div class="grupo-input">
-    <label>Confirme su Contraseña:</label>
-    <input id="confirmarContrasena" name="confirmarContrasena" type="password" required placeholder="Confirme su Contraseña" minlength="8">
-</div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Fecha de Nacimiento</label>
+                                <input type="date" id="fechaNacimiento" name="Fecha_Nacimiento"   class="form-control" required>
+                            </div>
 
-                 <div class="grupo-botones">        
-                    <button type="submit">Guardar</button>
-                    <button type="reset">Limpiar Formulario</button>
-                 </div>
-                 <p id="mensajeRegistro" role="status" aria-live="polite"></p>
-            </form>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Dirección de Residencia</label>
+                                <input type="text" id="direccion" name="Direccion_Residencia" class="form-control" required placeholder="Ej: Cra 25 # 11-105">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Teléfono</label>
+                                    <input type="tel" id="telefono" name="Telefono" class="form-control" required placeholder="Ej: 3225817510">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Ciudad</label>
+                                    <select id="ciudad" name="Ciudad" class="form-select" required>
+                                        <option value="">Seleccione una ciudad</option>
+                                        <option>Duitama</option>
+                                        <option>Sogamoso</option>
+                                        <option>Tunja</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Correo Electrónico</label>
+                                <input type="email" id="correo" name="Email" class="form-control" required placeholder="correo@ejemplo.com">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Género</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Genero" id="FEMENINO" value="FEMENINO" required>
+                                        <label class="form-check-label" for="FEMENINO">Femenino</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Genero" id="MASCULINO" value="MASCULINO">
+                                        <label class="form-check-label" for="MASCULINO">Masculino</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Genero" id="OTRO" value="OTRO">
+                                        <label class="form-check-label" for="OTRO">Otro</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Contraseña</label>
+                                <input type="password" id="contraseña" name="Contraseña" class="form-control" required placeholder="Ingrese su contraseña">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Confirmar Contraseña</label>
+                                <input type="password" id="confirmarContraseña" name="ConfirmarContraseña" class="form-control" required placeholder="Confirme su contraseña">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primario flex-grow-1">Guardar</button>
+                                <button type="reset" class="btn btn-secundario flex-grow-1">Limpiar</button>
+                            </div>
+                            <p id="mensajeRegistro" role="status" aria-live="polite"></p>
+                        </form>
+
+                        <div class="mt-4 text-center">
+                            <a href="dashboard.html" class="text-decoration-none" style="color: #b37575;">← Volver al Panel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 <script src="../Controlador/Asociado.js"></script>
 </html>
