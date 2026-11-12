@@ -17,7 +17,7 @@ try{
         throw new Exception("Datos inválidos.");
     }
 
-    $email = $datos['email'] ?? "";
+    $email = $datos['usuario'] ?? "";
     $contraseña = $datos['contraseña'] ?? "";
 
     if (!is_string($email) || !is_string($contraseña) || $email === "" || $contraseña === "") {
@@ -32,18 +32,18 @@ try{
     $consulta->execute([':email' => $email]);
     $asociado = $consulta->fetch();
 
-    if (!$asociado || !password_verify($contraseña, $asociado['contraseña'])|| empty($asociado['contraseña'])) {
+    if (!$asociado || !password_verify($contraseña, $asociado['Contraseña'])|| empty($asociado['Contraseña'])) {
         http_response_code(401);
         throw new Exception("Email o contraseña incorrectos.");
     }
 
     $_SESSION["rol"]= strtolower($asociado['rol']);
-    $_SESSION["documento"]= $asociado['documento'];
+    $_SESSION["documento"]= $asociado['Documento'];
 
     echo json_encode([
         "success" => true,
         "rol" => $_SESSION["rol"],
-        "nombre" => $asociado['nombres'] . " " . $asociado['apellidos'],
+        "nombre" => $asociado['Nombre'] . " " . $asociado['Apellido'],
     ]);
 
 }catch(PDOException $e){

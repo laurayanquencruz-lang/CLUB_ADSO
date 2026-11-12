@@ -2,17 +2,18 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, incial-scale=1.0">
         <title>MR CLUB</title>
-        <link rel="stylesheet" href="../Assets/CSS/estilos.css">
+        <link rel="stylesheet" href="../Assests/estilos.css">
     </head>
     <body>
-        <div>
+        <div class="contenedor-formulario">
             <h2>Inicio de Sesión</h2>
-            <form id="formLogin" action="../Modelos/iniciarSesion.php" method="POST">
+            <form id="formLogin" action="../Modelo/iniciar_sesion.php" method="POST">
                 
                 <div class="grupo-input">
-                    <label>Usuario:</label>
-                    <input id="usuario" type="text" name="email" required placeholder="Ingrese su usuario">
+                    <label for="usuario">Usuario:</label>
+                    <input id="usuario" name="usuario" type="text" required placeholder="Ingrese su usuario">
                 </div>
 
                 <div class="grupo-input">
@@ -24,12 +25,13 @@
                     <button type="submit">Ingresar</button>
                     <button type="reset">Limpiar Formulario</button>
                 </div>
+                <div class="registro" style="text-align: center; margin-top: 18px;"></div>
+                <p>¿no tienes cuenta? <a href="Asociados.html" style="font-weight: bold; color:deeppink;"></a></p>
+                </div>
                 <p id="mensajeLogin" class="text-danger mt-3 mb-0" role="alert"></p>
                 
             </form>
         </div>
+        <script src="../Controlador/login.js"></script>
     </body>
-    
-
-    <script src="../Controladores/login.js"></script>
 </html>
