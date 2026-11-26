@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// MODELO PAGO (Pago.php)
+// Consultas SQL (SELECT, INSERT, UPDATE, DELETE) sobre la tabla "pagos"
+// ============================================================================
 require_once __DIR__ . '/../Config/conexion.php';
 
 class Pago
 {
+    // --- PARTE 1: Conexión PDO a la base de datos ---
     private $conexion;
 
     public function __construct()
@@ -11,7 +16,7 @@ class Pago
         $this->conexion = $conexion->conectar();
     }
 
-    // Lista todos los pagos junto con el nombre del asociado (por su documento)
+    // --- PARTE 2: Consultas de lectura (todos los pagos, por documento y lista de asociados) ---
     public function obtenerTodos()
     {
         $sql = "SELECT p.idPago, p.documento, p.monto, p.concepto, p.metodoPago,
@@ -49,7 +54,7 @@ class Pago
         return $consulta->fetchAll();
     }
 
-    // Registra un nuevo pago en la base de datos y devuelve su ID
+    // --- PARTE 3: Operaciones de escritura (guardar, editar y eliminar pagos) ---
     public function guardar($datos)
     {
         $sql = "INSERT INTO pagos

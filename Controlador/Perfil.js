@@ -1,10 +1,15 @@
-// Controlador de la vista Mi Perfil: carga los datos registrados y permite subir foto de perfil
+// ============================================================================
+// CONTROLADOR DE PERFIL (Perfil.js)
+// Carga los datos personales del usuario desde MySQL y permite subir foto
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // --- PARTE 1: Verificación de sesión activa en el navegador ---
     if (localStorage.getItem("logueado") !== "true") {
         window.location.replace("login.html");
         return;
     }
 
+    // --- PARTE 2: Referencias a los elementos del HTML ---
     const inputFoto = document.getElementById("inputFotoPerfil");
     const btnCambiarFoto = document.getElementById("btnCambiarFoto");
     const btnActualizar = document.getElementById("btnActualizarPerfil");
@@ -12,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const iconoAvatar = document.getElementById("iconoAvatarPerfil");
     const mensajePerfil = document.getElementById("mensajePerfil");
 
+    // --- PARTE 3: Funciones auxiliares de interfaz (mensajes y vista de foto) ---
     function mostrarMensaje(texto, tipo) {
         if (!mensajePerfil) return;
         mensajePerfil.className = `alert alert-${tipo} mt-3 mb-0 fw-semibold text-start`;
@@ -30,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Consulta los datos del perfil desde MySQL
+    // --- PARTE 4: Consultar datos del perfil desde PHP/MySQL (GET) ---
     async function cargarPerfil() {
         try {
             const respuesta = await fetch("../Modelo/gestionPerfil.php", {
@@ -84,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Abre el selector de archivo al pulsar "Cambiar foto de perfil"
+    // --- PARTE 5: Selección y subida de nueva foto de perfil (POST multipart) ---
     if (btnCambiarFoto && inputFoto) {
         btnCambiarFoto.addEventListener("click", () => inputFoto.click());
 

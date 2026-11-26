@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- ================= CABECERA: ESTILOS Y TEMA AMARILLO (ACTIVIDADES) ================= -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +11,13 @@
     <link rel="stylesheet" href="../Assests/encabezado.css?v=3">
 </head>
 <body class="tema-amarillo">
-    <!-- Encabezado morado compartido para Administrador y Asociado -->
+    <!-- PARTE 1: Encabezado de navegación compartido (lo renderiza encabezado.js) -->
     <div id="encabezado-app"></div>
 
+    <!-- PARTE 2: Contenedor en 2 columnas (izquierda formulario vertical, derecha tabla de registros) -->
     <div class="container-fluid px-4 py-4">
         <div class="row g-4 align-items-start">
-            <!-- Columna izquierda: formulario vertical para crear o actualizar una actividad -->
+            <!-- PARTE 2A (Izquierda): Formulario para crear o editar una actividad (solo visible para Admin) -->
             <div class="col-12 col-lg-4" id="contenedorFormActividad">
                 <div class="card form-modulo-card shadow-sm border-0">
                     <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
@@ -84,7 +86,7 @@
                 </div>
             </div>
 
-            <!-- Columna derecha: tabla de actividades registradas -->
+            <!-- PARTE 2B (Derecha): Tabla con todas las actividades guardadas en MySQL -->
             <div class="col-12 col-lg-8" id="contenedorTablaActividad">
                 <div class="card tabla-modulo-card shadow-sm border-0">
                     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
@@ -121,6 +123,7 @@
         </div>
     </div>
 
+    <!-- PARTE 3: Scripts de Bootstrap, encabezado compartido y controlador CRUD de actividades -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../Controlador/encabezado.js?v=2"></script>
     <script src="../Controlador/Actividades.js?v=4"></script>

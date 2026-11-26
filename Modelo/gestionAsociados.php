@@ -1,9 +1,13 @@
 <?php
+// ============================================================================
+// API CRUD DE ASOCIADOS (gestionAsociados.php)
+// Recibe peticiones GET, POST, PUT y DELETE desde Controlador/Asociado.js
+// ============================================================================
 session_start();
 
 header("Content-Type: application/json; charset=UTF-8");
 
-// Lee el JSON enviado por fetch (o $_POST si viene como formulario)
+// --- PARTE 1: Lectura del cuerpo JSON y validación de campos del asociado ---
 function leerDatosAsociado()
 {
     $contenido = file_get_contents("php://input");
@@ -76,6 +80,7 @@ function validarAsociado($datos, $esEdicion = false)
     ];
 }
 
+// --- PARTE 2: Control de sesión, permisos por rol y enrutamiento por método HTTP ---
 try {
     if (!isset($_SESSION["documento"], $_SESSION["rol"])) {
         http_response_code(401);

@@ -1,5 +1,9 @@
-// Controlador CRUD de Préstamos con tabla independiente por cada asociado
+// ============================================================================
+// CONTROLADOR CRUD DE PRÉSTAMOS (Prestamos.js)
+// Muestra una tabla independiente por asociado; Admin edita/elimina, Asociado abona
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // --- PARTE 1: Referencias al DOM y validación de sesión/rol ---
     const formPrestamo = document.getElementById("formPrestamo");
     const contenedorForm = document.getElementById("contenedorFormPrestamo");
     const inputId = document.getElementById("idPrestamos");
@@ -28,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     aplicarPermisosRol();
 
+    // --- PARTE 2: Funciones auxiliares (mensajes, formato COP y llamadas a la API) ---
     function mostrarMensaje(texto, tipo) {
         if (!mensajePrestamo) return;
         mensajePrestamo.className = `alert alert-${tipo} mb-0 fw-semibold`;
@@ -103,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (valorPrevio) selectAsociado.value = valorPrevio;
     }
 
-    // Construye una tarjeta + tabla independiente para los préstamos de un asociado
+    // --- PARTE 3: Construcción de tarjeta + tabla independiente por asociado ---
     function crearTarjetaAsociado(grupo) {
         const card = document.createElement("div");
         card.className = "card tabla-modulo-card shadow-sm border-0";
@@ -196,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-    // Carga los préstamos desde MySQL y los agrupa en una tabla independiente por asociado
+    // --- PARTE 4: Cargar préstamos desde MySQL y agruparlos por asociado ---
     async function cargarPrestamos() {
         if (!listaTablasPrestamos) return;
         try {
@@ -245,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- PARTE 5: Editar, cancelar, eliminar y envío del formulario (POST / PUT) ---
     function cargarEnFormulario(p) {
         inputId.value = p.idPrestamos;
         selectAsociado.value = p.idAsociado;

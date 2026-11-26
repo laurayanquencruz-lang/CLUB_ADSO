@@ -1,5 +1,9 @@
-// Controlador de Administrador: ver solicitudes de comprobante con foto y mensaje, aprobar, rechazar o eliminar
+// ============================================================================
+// CONTROLADOR DE SOLICITUDES DE COMPROBANTE (SolicitudesComprobantes.js - Admin)
+// Muestra comprobantes recibidos, préstamo abonado, foto ampliada y acciones Aprobar/Rechazar
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // --- PARTE 1: Validación de sesión de administrador y referencias al DOM ---
     const rol = (localStorage.getItem("rol") || "").toLowerCase();
     if (localStorage.getItem("logueado") !== "true") {
         window.location.replace("login.html");
@@ -19,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mensajeModal = document.getElementById("mensajeModalSolicitud");
     const modal = new bootstrap.Modal(document.getElementById("modalVerSolicitud"));
 
+    // --- PARTE 2: Mensajes, contadores de pendientes y formato de préstamo ---
     function mostrarMensaje(texto, tipo) {
         alerta.className = `alert alert-${tipo} mb-3 fw-semibold`;
         alerta.textContent = texto;
@@ -57,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return span;
     }
 
+    // --- PARTE 3: Consultar solicitudes recibidas y construir la tabla (GET) ---
     async function cargarSolicitudes() {
         try {
             const respuesta = await fetch("../Modelo/gestionComprobantes.php", {
@@ -168,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- PARTE 4: Aprobar / Rechazar (PUT) y Eliminar solicitud (DELETE) ---
     async function cambiarEstado(idComprobante, nuevoEstado) {
         try {
             const respuesta = await fetch("../Modelo/gestionComprobantes.php", {

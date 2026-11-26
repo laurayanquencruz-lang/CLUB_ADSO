@@ -1,4 +1,9 @@
-// Función global para cerrar sesión desde cualquier vista que tenga el encabezado
+// ============================================================================
+// ENCABEZADO COMPARTIDO (encabezado.js)
+// Dibuja la barra superior según el rol, muestra avatar, contador y cerrar sesión
+// ============================================================================
+
+// --- PARTE 1: Función global para cerrar sesión en PHP y limpiar localStorage ---
 async function cerrarSesion() {
     try {
         const respuesta = await fetch("../Modelo/cerrar_sesion.php", {
@@ -20,7 +25,7 @@ async function cerrarSesion() {
     }
 }
 
-// Permite actualizar en vivo la foto de perfil mostrada en el encabezado
+// --- PARTE 2: Helpers globales para actualizar foto y contador de solicitudes en vivo ---
 window.actualizarFotoEncabezado = function (rutaFoto) {
     const imgHeader = document.getElementById("fotoPerfilHeader");
     const iconoHeader = document.getElementById("iconoPerfilHeader");
@@ -45,7 +50,7 @@ window.actualizarContadorSolicitudes = function (total) {
     badge.classList.toggle("d-none", cantidad <= 0);
 };
 
-// Construye e inserta el encabezado adaptado al rol (admin o asociado) con foto de perfil
+// --- PARTE 3: Construcción e inyección del menú HTML según rol (Admin vs Asociado) ---
 function renderizarEncabezado() {
     const contenedor = document.getElementById("encabezado-app");
     if (!contenedor) return;

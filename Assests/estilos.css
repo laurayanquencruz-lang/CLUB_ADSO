@@ -1,9 +1,11 @@
+/* ================= 1. ESTILOS GENERALES Y FUENTE DEL LOGIN ================= */
 *{
     margin:2px;
     padding:4px;
     font-family:Georgia, 'Times New Roman', Times, serif ;
 }
 
+/* ================= 2. FONDO DE PANTALLA Y CENTRADO DEL FORMULARIO ================= */
 body{
     background-color: #fde2e8;
     background-image: url("fondo-login.jpg?v=2");
@@ -12,12 +14,13 @@ body{
     background-size: cover;
     background-attachment: fixed;
     display:flex;
-    justify-content: center; /*horizontal*/
-    align-items: center;
+    justify-content: center; /* Centra horizontalmente la tarjeta */
+    align-items: center;     /* Centra verticalmente la tarjeta */
     min-height: 100vh;
     padding: 20px;
 }
 
+/* ================= 3. TÍTULO PRINCIPAL DEL LOGIN ================= */
 h2{
     color:#7a1047;
     margin-bottom: 20px;
@@ -28,6 +31,7 @@ h2{
     
 }
 
+/* ================= 4. CAMPOS DE ENTRADA Y BOTONES ================= */
 .grupo-input{
     margin-bottom: 15px;
     display: flex;
@@ -51,6 +55,7 @@ button{
     transition: background-color 0.2s;
 }
 
+/* Botón primario (Ingresar) y secundario (Limpiar) */
 button:first-child {
     background-color: #d4a8a8;
     color: #1a1a1a;
@@ -80,6 +85,7 @@ input:focus, select:focus {
     box-shadow: 0 0 6px rgba(158, 27, 92, 0.25);
 }
 
+/* ================= 5. TARJETA ROSADA TRANSLÚCIDA DEL LOGIN ================= */
 .contenedor-formulario {
     background-color: rgba(255, 243, 247, 0.72);
     border: 3px solid #9e1b5c;

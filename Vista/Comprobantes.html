@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- ================= CABECERA: ESTILOS Y TEMA MENTA (SUBIR COMPROBANTE) ================= -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../Assests/encabezado.css?v=5">
     <style>
+        /* Recuadro de vista previa de la foto antes de enviarla */
         .preview-comprobante {
             width: 100%;
             max-height: 220px;
@@ -17,6 +19,7 @@
             background-color: rgba(255, 255, 255, 0.75);
             padding: 6px;
         }
+        /* Miniatura clicable de la foto en la tabla de envíos */
         .miniatura-comprobante {
             width: 68px;
             height: 68px;
@@ -32,12 +35,13 @@
     </style>
 </head>
 <body class="tema-menta">
-    <!-- Encabezado compartido -->
+    <!-- PARTE 1: Encabezado de navegación compartido -->
     <div id="encabezado-app"></div>
 
+    <!-- PARTE 2: Contenido en 2 columnas (izquierda formulario de envío, derecha historial del asociado) -->
     <div class="container-fluid px-4 py-4">
         <div class="row g-4 align-items-start">
-            <!-- Columna izquierda: formulario vertical para subir foto y mensaje -->
+            <!-- PARTE 2A (Izquierda): Formulario para elegir préstamo, adjuntar foto y escribir mensaje -->
             <div class="col-12 col-lg-4">
                 <div class="card form-modulo-card shadow-sm border-0">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">

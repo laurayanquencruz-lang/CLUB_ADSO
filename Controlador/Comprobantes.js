@@ -1,5 +1,9 @@
-// Controlador de Asociado: subir foto de comprobante + mensaje indicando opcionalmente el préstamo al que abona
+// ============================================================================
+// CONTROLADOR DE SUBIR COMPROBANTE (Comprobantes.js - Perfil Asociado)
+// Permite elegir préstamo a abonar, adjuntar foto + mensaje y ver estado de envíos
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // --- PARTE 1: Validación de sesión y referencias a elementos del HTML ---
     if (localStorage.getItem("logueado") !== "true") {
         window.location.replace("login.html");
         return;
@@ -20,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const imgModal = document.getElementById("imgModalComprobante");
     const modalFoto = new bootstrap.Modal(document.getElementById("modalVerFoto"));
 
-    // Lee si vino desde el botón "Abonar" de un préstamo (ej. Comprobantes.html?idPrestamo=5)
+    // --- PARTE 2: Preselección de préstamo desde URL y vista previa de imagen ---
     const paramsUrl = new URLSearchParams(window.location.search);
     let prestamoPreseleccionado = paramsUrl.get("idPrestamo") || "";
 
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lector.readAsDataURL(archivo);
     });
 
-    // Carga los préstamos del asociado y su historial de comprobantes enviados
+    // --- PARTE 3: Cargar préstamos del asociado e historial de comprobantes (GET) ---
     async function cargarMisComprobantes() {
         try {
             const respuesta = await fetch("../Modelo/gestionComprobantes.php", {
@@ -173,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Envía foto, mensaje y el préstamo seleccionado al servidor PHP
+    // --- PARTE 4: Subir foto + mensaje + idPrestamo al servidor PHP (POST FormData) ---
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 

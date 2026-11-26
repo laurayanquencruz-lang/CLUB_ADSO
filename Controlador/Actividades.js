@@ -1,5 +1,9 @@
-// Controlador CRUD de Actividades: listar, registrar, editar, actualizar y eliminar
+// ============================================================================
+// CONTROLADOR CRUD DE ACTIVIDADES (Actividades.js)
+// Maneja listar (GET), crear (POST), editar/actualizar (PUT) y eliminar (DELETE)
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // --- PARTE 1: Referencias al DOM y estado del rol ---
     const formularioActividad = document.getElementById("formActividad");
     const botonGuardar = document.getElementById("btnGuardarActividad");
     const botonCancelar = document.getElementById("btnCancelarEdicion");
@@ -46,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mensajeActividad.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
-    // Realiza peticiones HTTP (GET, POST, PUT, DELETE) a gestionActividades.php
+    // --- PARTE 2: Comunicación con el backend PHP (gestionActividades.php) ---
     async function solicitarApi(metodo, datos = null) {
         const opciones = {
             method: metodo,
@@ -89,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return td;
     }
 
-    // Carga las actividades desde MySQL y las dibuja en la tabla
+    // --- PARTE 3: Cargar y renderizar la tabla de actividades ---
     async function cargarActividades() {
         if (!tablaActividades) return;
         try {
@@ -154,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Llena el formulario con los datos de la fila seleccionada para editarla
+    // --- PARTE 4: Acciones de edición, cancelación y eliminación ---
     function cargarEnFormulario(act) {
         inputId.value = act.idActividad;
         document.getElementById("nombreActividad").value = act.NombreActividad || "";
@@ -213,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
         botonRecargar.addEventListener("click", cargarActividades);
     }
 
-    // Envía POST (crear) o PUT (actualizar) según si hay idActividad cargado
+    // --- PARTE 5: Evento submit del formulario (POST crear / PUT actualizar) ---
     if (formularioActividad) {
         formularioActividad.addEventListener("submit", async (evento) => {
             evento.preventDefault();

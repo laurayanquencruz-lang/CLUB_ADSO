@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// API CRUD DE PAGOS (gestionPagos.php)
+// Admin: gestiona todos los pagos | Asociado: consulta únicamente sus propios pagos
+// ============================================================================
 session_start();
 
 header("Content-Type: application/json; charset=UTF-8");
 
+// --- PARTE 1: Lectura de JSON y validación de asociado, concepto, monto, fecha y método ---
 function leerDatosPago()
 {
     $contenido = file_get_contents("php://input");
@@ -60,6 +65,7 @@ function validarPago($datos)
     ];
 }
 
+// --- PARTE 2: Validación de sesión/rol y ejecución según método HTTP (GET, POST, PUT, DELETE) ---
 try {
     if (!isset($_SESSION["documento"], $_SESSION["rol"])) {
         http_response_code(401);

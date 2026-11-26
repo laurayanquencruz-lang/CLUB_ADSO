@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// API CRUD DE PRÉSTAMOS (gestionPrestamos.php)
+// Admin: gestiona todos los préstamos | Asociado: consulta únicamente los suyos
+// ============================================================================
 session_start();
 
 header("Content-Type: application/json; charset=UTF-8");
 
+// --- PARTE 1: Lectura de JSON y validación de monto, cuotas, tasa, fecha y garantía ---
 function leerDatosPrestamo()
 {
     $contenido = file_get_contents("php://input");
@@ -64,6 +69,7 @@ function validarPrestamo($datos)
     ];
 }
 
+// --- PARTE 2: Validación de sesión/rol y ejecución según método HTTP (GET, POST, PUT, DELETE) ---
 try {
     if (!isset($_SESSION["documento"], $_SESSION["rol"])) {
         http_response_code(401);

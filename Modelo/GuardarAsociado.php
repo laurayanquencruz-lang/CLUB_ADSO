@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// REGISTRO DIRECTO DE ASOCIADO (GuardarAsociado.php)
+// Endpoint POST heredado que valida e inserta un nuevo asociado en MySQL
+// ============================================================================
 header('Content-Type: application/json; charset=utf8mb4');
 require_once __DIR__ . '/Asociado.php';
 
 try {
+    // --- PARTE 1: Validar que la petición sea POST y leer JSON o $_POST ---
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);
         throw new Exception("Método HTTP no permitido.");
@@ -29,6 +34,7 @@ try {
         throw new Exception("Datos inválidos.");
     }
 
+    // --- PARTE 2: Validar campos obligatorios y formato de correo ---
     $campos = ["Documento", "Nombre", "Apellido", "Fecha_Nacimiento", "Genero", "Direccion_Residencia", "Ciudad", "Telefono", "Email","Contraseña"];
     foreach ($campos as $campo) {
         if (!isset($datos[$campo])) {
@@ -48,6 +54,7 @@ try {
         throw new Exception("Email inválido.");
     }
 
+    // --- PARTE 3: Guardar el asociado usando el modelo Asociado y responder JSON ---
     $asociado = new Asociado($datos);
     $resultado = $asociado->guardar();
 

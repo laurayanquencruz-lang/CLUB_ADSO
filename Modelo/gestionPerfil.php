@@ -1,10 +1,14 @@
 <?php
+// ============================================================================
+// API DE PERFIL (gestionPerfil.php)
+// GET: devuelve los datos del usuario autenticado | POST: sube y guarda su foto
+// ============================================================================
 session_start();
 
 header("Content-Type: application/json; charset=UTF-8");
 
 try {
-    // Verifica que exista una sesión activa
+    // --- PARTE 1: Verificación de sesión activa y conexión a MySQL ---
     if (!isset($_SESSION["documento"], $_SESSION["rol"])) {
         http_response_code(401);
         throw new Exception("Inicia sesión para ver tu perfil.");
@@ -16,7 +20,7 @@ try {
     require_once __DIR__ . "/../Config/conexion.php";
     $conexion = (new Conexion())->conectar();
 
-    // GET: devuelve los datos registrados del usuario autenticado
+    // --- PARTE 2 (GET): Consultar los datos registrados del usuario en MySQL ---
     if ($metodo === "GET") {
         $sql = "SELECT idAsociado, Documento, Nombre, Apellido, Fecha_Nacimiento, Genero,
                        Direccion_Residencia, Ciudad, Telefono, Email, rol, FotoPerfil
@@ -39,7 +43,7 @@ try {
         exit;
     }
 
-    // POST: recibe y guarda una nueva foto de perfil para el usuario autenticado
+    // --- PARTE 3 (POST): Validar imagen, guardarla en disco y actualizar FotoPerfil en MySQL ---
     if ($metodo === "POST") {
         if (!isset($_FILES["foto"]) || $_FILES["foto"]["error"] !== UPLOAD_ERR_OK) {
             http_response_code(400);

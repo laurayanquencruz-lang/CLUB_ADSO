@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// MODELO COMPROBANTE (Comprobante.php)
+// Consultas SQL sobre "comprobantes_pago" vinculando asociados y préstamos
+// ============================================================================
 require_once __DIR__ . '/../Config/conexion.php';
 
 class Comprobante
 {
+    // --- PARTE 1: Conexión PDO a la base de datos ---
     private $conexion;
 
     public function __construct()
@@ -11,7 +16,7 @@ class Comprobante
         $this->conexion = $conexion->conectar();
     }
 
-    // Lista todas las solicitudes de comprobante con datos del asociado y del préstamo abonado
+    // --- PARTE 2: Consultas de lectura y conteo de solicitudes pendientes ---
     public function obtenerTodos()
     {
         $sql = "SELECT c.idComprobante, c.documento, c.idPrestamo, c.mensaje, c.rutaImagen, c.estado, c.fechaEnvio,
@@ -78,7 +83,7 @@ class Comprobante
         return (int)$consulta->fetchColumn();
     }
 
-    // Guarda un nuevo comprobante enviado por un asociado (opcionalmente asociado a un préstamo)
+    // --- PARTE 3: Escritura (guardar envío, aprobar/rechazar estado y eliminar) ---
     public function guardar($documento, $mensaje, $rutaImagen, $idPrestamo = null)
     {
         $sql = "INSERT INTO comprobantes_pago (documento, idPrestamo, mensaje, rutaImagen, estado)

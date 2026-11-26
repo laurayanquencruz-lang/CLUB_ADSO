@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// MODELO PRÉSTAMO (Prestamo.php)
+// Consultas SQL (SELECT, INSERT, UPDATE, DELETE) sobre la tabla "prestamos"
+// ============================================================================
 require_once __DIR__ . '/../Config/conexion.php';
 
 class Prestamo
 {
+    // --- PARTE 1: Conexión PDO a la base de datos ---
     private $conexion;
 
     public function __construct()
@@ -11,7 +16,7 @@ class Prestamo
         $this->conexion = $conexion->conectar();
     }
 
-    // Lista todos los préstamos junto con el nombre y documento del asociado
+    // --- PARTE 2: Consultas de lectura (todos los préstamos, por documento y lista de asociados) ---
     public function obtenerTodos()
     {
         $sql = "SELECT p.idPrestamos, p.ValorPrestamo, p.TasaInteres, p.NumeroCuotas,
@@ -49,7 +54,7 @@ class Prestamo
         return $consulta->fetchAll();
     }
 
-    // Inserta un nuevo préstamo y devuelve su ID
+    // --- PARTE 3: Operaciones de escritura (guardar, editar y eliminar préstamos) ---
     public function guardar($datos)
     {
         $sql = "INSERT INTO prestamos

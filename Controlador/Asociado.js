@@ -1,5 +1,9 @@
-// Controlador CRUD de Asociados: listar, registrar, editar, actualizar y eliminar
+// ============================================================================
+// CONTROLADOR CRUD DE ASOCIADOS (Asociado.js)
+// Maneja listar (GET), crear (POST), editar/actualizar (PUT) y eliminar (DELETE)
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // --- PARTE 1: Referencias a los elementos del formulario y la tabla ---
     const formRegistro = document.getElementById("formRegistroAsociado");
     if (!formRegistro) return;
 
@@ -36,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     aplicarPermisosRol();
 
+    // --- PARTE 2: Mensajes y peticiones HTTP a gestionAsociados.php ---
     function mostrarMensaje(texto, tipo) {
         if (!mensajeRegistro) return;
         mensajeRegistro.className = `alert alert-${tipo} mb-0 fw-semibold`;
@@ -83,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return td;
     }
 
-    // Carga la tabla de asociados registrados
+    // --- PARTE 3: Cargar y dibujar la tabla de asociados registrados ---
     async function cargarAsociados() {
         if (!tablaAsociados) return;
         try {
@@ -146,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Carga los datos de un asociado en el formulario para editarlo
+    // --- PARTE 4: Cargar en formulario para editar, cancelar edición y eliminar ---
     function cargarEnFormulario(asoc) {
         inputId.value = asoc.idAsociado;
         document.getElementById("documento").value = asoc.Documento || "";
@@ -220,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
         botonRecargar.addEventListener("click", cargarAsociados);
     }
 
-    // Crea (POST) o actualiza (PUT) un asociado
+    // --- PARTE 5: Envío del formulario (POST para nuevo / PUT para actualizar) ---
     formRegistro.addEventListener("submit", async (e) => {
         e.preventDefault();
         const editando = inputId.value !== "";

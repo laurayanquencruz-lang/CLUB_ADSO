@@ -1,8 +1,13 @@
 <?php
+// ============================================================================
+// MODELO ASOCIADO (Asociado.php)
+// Contiene todas las consultas SQL (CRUD) para la tabla "asociados"
+// ============================================================================
 require_once __DIR__ . '/../Config/conexion.php';
 
 class Asociado
 {
+    // --- PARTE 1: Propiedades de la entidad y conexión PDO ---
     private $conexion;
     private $Documento;
     private $Nombre;
@@ -37,7 +42,7 @@ class Asociado
         }
     }
 
-    // Lista todos los asociados sin exponer el hash de la contraseña
+    // --- PARTE 2: Consultas de lectura (SELECT todos o por documento) ---
     public function obtenerTodos()
     {
         $sql = "SELECT idAsociado, Documento, Nombre, Apellido, Fecha_Nacimiento, Genero,
@@ -61,7 +66,7 @@ class Asociado
         return $consulta->fetchAll();
     }
 
-    // Inserta un nuevo asociado en la base de datos
+    // --- PARTE 3: Escritura en base de datos (INSERT guardar, UPDATE editar, DELETE eliminar) ---
     public function guardar($datos = null)
     {
         if (is_array($datos)) {

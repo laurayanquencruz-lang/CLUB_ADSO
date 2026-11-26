@@ -1,8 +1,14 @@
 <?php
+// ============================================================================
+// API DE COMPROBANTES DE PAGO (gestionComprobantes.php)
+// GET: lista solicitudes y pendientes | POST: sube foto + mensaje + idPrestamo
+// PUT: Admin aprueba/rechaza | DELETE: Admin elimina solicitud e imagen
+// ============================================================================
 session_start();
 
 header("Content-Type: application/json; charset=UTF-8");
 
+// --- PARTE 1: Helper para decodificar JSON en PUT y DELETE ---
 function leerJsonComprobante()
 {
     $contenido = file_get_contents("php://input");
@@ -14,6 +20,7 @@ function leerJsonComprobante()
     return $datos;
 }
 
+// --- PARTE 2: Control de sesión y enrutamiento de operaciones (GET, POST, PUT, DELETE) ---
 try {
     if (!isset($_SESSION["documento"], $_SESSION["rol"])) {
         http_response_code(401);
