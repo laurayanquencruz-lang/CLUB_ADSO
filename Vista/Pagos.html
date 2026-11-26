@@ -3,74 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Pago</title>
+    <title>Gestión de Pagos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../Assests/encabezado.css?v=3">
 </head>
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow border-0">
-                    <div class="card-header bg-success text-white py-3">
-                        <h4 class="mb-0"><i class="fas fa-cash-register me-2"></i> Registro de Pagos</h4>
+<body class="tema-menta">
+    <!-- Encabezado compartido adaptado al rol (Administrador o Asociado) -->
+    <div id="encabezado-app"></div>
+
+    <div class="container-fluid px-4 py-4">
+        <div class="row g-4 align-items-start">
+            <!-- Columna izquierda: formulario vertical para registrar o actualizar pagos -->
+            <div class="col-12 col-lg-4" id="contenedorFormPago">
+                <div class="card form-modulo-card shadow-sm border-0">
+                    <div class="card-header bg-success text-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0" id="tituloFormPago"><i class="fas fa-cash-register me-2"></i> Registro de Pagos</h5>
+                        <a href="dashboard.html" class="btn btn-sm btn-outline-light">← Panel</a>
                     </div>
                     <div class="card-body p-4">
-                        <form class="needs-validation" novalidate>
+                        <form id="formPago" class="needs-validation" novalidate>
+                            <input type="hidden" id="idPago" name="idPago">
+
                             <div class="row g-3">
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label for="asociadoPago" class="form-label">Asociado</label>
                                     <select class="form-select" id="asociadoPago" required>
-                                        <option value="" selected disabled>Seleccione el asociado...</option>
-                                        <option value="1">Juan Pérez - 1023456789</option>
-                                        <option value="2">María Gómez - 1098765432</option>
+                                        <option value="" selected disabled>Cargando asociados...</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="conceptoPago" class="form-label">Concepto</label>
                                     <select class="form-select" id="conceptoPago" required>
                                         <option value="" selected disabled>Seleccione...</option>
-                                        <option value="CuotaSostenimiento">Cuota de Sostenimiento</option>
-                                        <option value="Inscripcion">Inscripción</option>
-                                        <option value="AporteExtra">Aporte Extraordinario</option>
+                                        <option value="Cuota de Sostenimiento">Cuota de Sostenimiento</option>
+                                        <option value="Inscripción">Inscripción</option>
+                                        <option value="Aporte Extraordinario">Aporte Extraordinario</option>
+                                        <option value="Abono Préstamo">Abono Préstamo</option>
                                         <option value="Multa">Multa</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="montoPago" class="form-label">Monto ($)</label>
-                                    <input type="number" class="form-control" id="montoPago" min="0" step="0.01" required placeholder="0.00">
+                                    <input type="number" class="form-control" id="montoPago" min="1" step="0.01" required placeholder="0.00">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="fechaPago" class="form-label">Fecha de Pago</label>
                                     <input type="date" class="form-control" id="fechaPago" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="metodoPago" class="form-label">Método de Pago</label>
                                     <select class="form-select" id="metodoPago" required>
                                         <option value="" selected disabled>Seleccione...</option>
                                         <option value="Efectivo">Efectivo</option>
                                         <option value="Transferencia">Transferencia Bancaria</option>
-                                        <option value="NequiDaviplata">Nequi / Daviplata</option>
+                                        <option value="Nequi / Daviplata">Nequi / Daviplata</option>
                                     </select>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label for="comprobante" class="form-label">Número de Comprobante / Referencia</label>
-                                    <input type="text" class="form-control" id="comprobante" placeholder="Ej. TRF-998231">
+                                    <input type="text" class="form-control" id="comprobante" maxlength="50" placeholder="Ej. TRF-998231">
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label for="notasPago" class="form-label">Observaciones</label>
                                     <textarea class="form-control" id="notasPago" rows="2" placeholder="Notas adicionales del pago..."></textarea>
                                 </div>
-                                <div class="col-12 mt-4">
-                                    <button class="btn btn-success w-100 py-2" type="submit"><i class="fas fa-check-circle me-2"></i> Registrar Pago</button>
+                                <div class="col-12">
+                                    <div id="mensajePago" class="d-none alert mb-0 fw-semibold" role="alert"></div>
+                                </div>
+                                <div class="col-12 mt-2 d-grid gap-2">
+                                    <button id="btnGuardarPago" class="btn btn-success py-2" type="submit">
+                                        <i class="fas fa-check-circle me-2"></i> Registrar Pago
+                                    </button>
+                                    <button id="btnCancelarPago" class="btn btn-secondary py-2 d-none" type="button">
+                                        <i class="fas fa-times me-1"></i> Cancelar edición
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+            <!-- Columna derecha: tablas independientes de pagos por cada asociado -->
+            <div class="col-12 col-lg-8" id="contenedorTablaPago">
+                <div class="card tabla-modulo-card shadow-sm border-0 mb-3">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold"><i class="bi bi-cash-coin me-2"></i> Pagos y Abonos Registrados por Asociado</h5>
+                        <button type="button" id="btnRecargarPagos" class="btn btn-sm btn-outline-dark fw-semibold">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Actualizar lista
+                        </button>
+                    </div>
+                </div>
+                <div id="listaTablasPagos" class="d-flex flex-column gap-3">
+                    <div class="card tabla-modulo-card shadow-sm border-0 p-4 text-center text-muted">
+                        Cargando pagos...
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Controlador/encabezado.js?v=2"></script>
+    <script src="../Controlador/Pagos.js?v=2"></script>
 </body>
 </html>

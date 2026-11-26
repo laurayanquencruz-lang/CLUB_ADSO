@@ -5,7 +5,12 @@
 }
 
 body{
-    background-color: gainsboro;
+    background-color: #fde2e8;
+    background-image: url("fondo-login.jpg?v=2");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
     display:flex;
     justify-content: center; /*horizontal*/
     align-items: center;
@@ -14,11 +19,11 @@ body{
 }
 
 h2{
-    color:black;
+    color:#7a1047;
     margin-bottom: 20px;
     font-size: 24px;
     text-align: center;
-    border-bottom: 2px solid #0d0d0e ;
+    border-bottom: 2px solid #9e1b5c;
     padding-bottom: 10px;
     
 }
@@ -63,21 +68,25 @@ button:last-child:hover {
 }
 input, select {
     padding: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
+    border: 1.5px solid #e2a3be;
+    border-radius: 6px;
     font-size: 15px;
+    background-color: rgba(255, 251, 252, 0.85);
 }
 
 input:focus, select:focus {
-    border-color: #000000;
-    box-shadow: 0 0 5px rgba(37, 99, 235, 0.1);
+    outline: none;
+    border-color: #9e1b5c;
+    box-shadow: 0 0 6px rgba(158, 27, 92, 0.25);
 }
 
 .contenedor-formulario {
-    background-color: #f9f9f9;
+    background-color: rgba(255, 243, 247, 0.72);
+    border: 3px solid #9e1b5c;
+    backdrop-filter: none;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 10px 26px rgba(158, 27, 92, 0.25);
     width: 100%;
     max-width: 500px;
 }

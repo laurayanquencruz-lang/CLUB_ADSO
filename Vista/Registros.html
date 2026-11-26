@@ -3,64 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Préstamos</title>
+    <title>Gestión de Préstamos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../Assests/encabezado.css?v=3">
 </head>
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow border-0">
-                    <div class="card-header bg-warning text-dark py-3">
-                        <h4 class="mb-0"><i class="fas fa-hand-holding-usd me-2"></i> Registro de Préstamos</h4>
+<body class="tema-lila">
+    <!-- Encabezado compartido adaptado al rol (Administrador o Asociado) -->
+    <div id="encabezado-app"></div>
+
+    <div class="container-fluid px-4 py-4">
+        <div class="row g-4 align-items-start">
+            <!-- Columna izquierda: formulario vertical para registrar o actualizar préstamos -->
+            <div class="col-12 col-lg-4" id="contenedorFormPrestamo">
+                <div class="card form-modulo-card shadow-sm border-0">
+                    <div class="card-header bg-warning text-dark py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0" id="tituloFormPrestamo"><i class="fas fa-hand-holding-usd me-2"></i> Registro de Préstamos</h5>
+                        <a href="dashboard.html" class="btn btn-sm btn-outline-dark">← Panel</a>
                     </div>
                     <div class="card-body p-4">
-                        <form class="needs-validation" novalidate>
+                        <form id="formPrestamo" class="needs-validation" novalidate>
+                            <input type="hidden" id="idPrestamos" name="idPrestamos">
+
                             <div class="row g-3">
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label for="asociadoPrestamo" class="form-label">Asociado Solicitante</label>
                                     <select class="form-select" id="asociadoPrestamo" required>
-                                        <option value="" selected disabled>Seleccione el asociado...</option>
-                                        <option value="1">Juan Pérez - 1023456789</option>
-                                        <option value="2">María Gómez - 1098765432</option>
+                                        <option value="" selected disabled>Cargando asociados...</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="montoPrestamo" class="form-label">Monto Solicitado ($)</label>
-                                    <input type="number" class="form-control" id="montoPrestamo" min="0" step="0.01" required placeholder="Ej. 500000">
+                                    <input type="number" class="form-control" id="montoPrestamo" min="1" step="0.01" required placeholder="Ej. 500000">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="cuotas" class="form-label">Número de Cuotas</label>
-                                    <input type="number" class="form-control" id="cuotas" min="1" max="36" required placeholder="Ej. 12">
+                                    <input type="number" class="form-control" id="cuotas" min="1" max="120" required placeholder="Ej. 12">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="tasaInteres" class="form-label">Tasa de Interés Mensual (%)</label>
                                     <input type="number" class="form-control" id="tasaInteres" step="0.01" min="0" required placeholder="Ej. 1.5">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="fechaDesembolso" class="form-label">Fecha Estimada de Desembolso</label>
+                                <div class="col-12">
+                                    <label for="fechaDesembolso" class="form-label">Fecha de Desembolso</label>
                                     <input type="date" class="form-control" id="fechaDesembolso" required>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label for="garantia" class="form-label">Garantía / Fiador</label>
-                                    <input type="text" class="form-control" id="garantia" required placeholder="Nombre del fiador o descripción de la garantía">
+                                    <input type="text" class="form-control" id="garantia" maxlength="150" required placeholder="Nombre del fiador o descripción de la garantía">
                                 </div>
-                                <div class="col-md-12">
-                                    <label for="observacionesPrestamo" class="form-label">Observaciones</label>
-                                    <textarea class="form-control" id="observacionesPrestamo" rows="2" placeholder="Condiciones especiales..."></textarea>
+                                <div class="col-12">
+                                    <label for="observacionesPrestamo" class="form-label">Propósito / Observaciones</label>
+                                    <textarea class="form-control" id="observacionesPrestamo" maxlength="200" rows="2" placeholder="Condiciones especiales o propósito..."></textarea>
                                 </div>
-                                <div class="col-12 mt-4">
-                                    <button class="btn btn-warning text-dark fw-bold w-100 py-2" type="submit"><i class="fas fa-paper-plane me-2"></i> Solicitar Préstamo</button>
+                                <div class="col-12">
+                                    <div id="mensajePrestamo" class="d-none alert mb-0 fw-semibold" role="alert"></div>
+                                </div>
+                                <div class="col-12 mt-2 d-grid gap-2">
+                                    <button id="btnGuardarPrestamo" class="btn btn-warning text-dark fw-bold py-2" type="submit">
+                                        <i class="fas fa-paper-plane me-2"></i> Registrar Préstamo
+                                    </button>
+                                    <button id="btnCancelarPrestamo" class="btn btn-secondary py-2 d-none" type="button">
+                                        <i class="fas fa-times me-1"></i> Cancelar edición
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+            <!-- Columna derecha: tablas independientes de préstamos por cada asociado -->
+            <div class="col-12 col-lg-8" id="contenedorTablaPrestamo">
+                <div class="card tabla-modulo-card shadow-sm border-0 mb-3">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold"><i class="bi bi-bank me-2"></i> Préstamos Registrados por Asociado</h5>
+                        <button type="button" id="btnRecargarPrestamos" class="btn btn-sm btn-outline-dark fw-semibold">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Actualizar lista
+                        </button>
+                    </div>
+                </div>
+                <div id="listaTablasPrestamos" class="d-flex flex-column gap-3">
+                    <div class="card tabla-modulo-card shadow-sm border-0 p-4 text-center text-muted">
+                        Cargando préstamos...
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../Controlador/Asociado.js"></script>
+    <script src="../Controlador/encabezado.js?v=2"></script>
+    <script src="../Controlador/Prestamos.js?v=2"></script>
 </body>
 </html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - MR CLUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../Assests/encabezado.css?v=5">
+    <style>
+        .perfil-avatar-wrap {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 4px solid #9c2b5d;
+            background: #ffd9e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(156, 43, 93, 0.25);
+        }
+
+        .perfil-avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .perfil-avatar-wrap .avatar-icono-default {
+            font-size: 4.5rem;
+            color: #9c2b5d;
+        }
+
+        .dato-perfil-box {
+            background-color: rgba(255, 255, 255, 0.78);
+            border: 1.5px solid rgba(156, 43, 93, 0.3);
+            border-radius: 10px;
+            padding: 12px 14px;
+            height: 100%;
+        }
+
+        .dato-perfil-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #9c2b5d;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .dato-perfil-valor {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3d1828;
+            word-break: break-word;
+        }
+
+        .btn-foto-perfil {
+            background-color: #9c2b5d;
+            border: 2px solid #721a41;
+            color: #ffffff;
+            font-weight: 700;
+            border-radius: 10px;
+        }
+
+        .btn-foto-perfil:hover {
+            background-color: #7d1f49;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="tema-rosa">
+    <!-- Encabezado compartido con la foto de perfil -->
+    <div id="encabezado-app"></div>
+
+    <div class="container py-4">
+        <div class="row g-4 justify-content-center align-items-start">
+            <!-- Columna izquierda: Foto de perfil y resumen -->
+            <div class="col-12 col-lg-4">
+                <div class="card form-modulo-card text-center p-4">
+                    <div class="perfil-avatar-wrap mb-3" id="contenedorAvatarPerfil">
+                        <i class="bi bi-person-fill avatar-icono-default" id="iconoAvatarPerfil"></i>
+                        <img id="imgAvatarPerfil" src="" alt="Foto de perfil" class="d-none">
+                    </div>
+
+                    <h4 class="fw-bold mb-1" style="color: #7d1f49;" id="perfilNombreTitulo">Cargando...</h4>
+                    <span class="badge rounded-pill mb-3 px-3 py-2 align-self-center" style="background-color: #9c2b5d;" id="perfilRolBadge">Asociado</span>
+
+                    <!-- Input oculto para seleccionar una imagen desde el equipo -->
+                    <input type="file" id="inputFotoPerfil" accept="image/jpeg,image/png,image/webp,image/gif" class="d-none">
+
+                    <button type="button" id="btnCambiarFoto" class="btn btn-foto-perfil w-100 py-2 mb-2">
+                        <i class="bi bi-camera-fill me-2"></i> Cambiar foto de perfil
+                    </button>
+                    <small class="text-muted">Formatos JPG, PNG, WEBP o GIF (máx. 3 MB)</small>
+
+                    <div id="mensajePerfil" class="d-none alert mt-3 mb-0 fw-semibold text-start" role="alert"></div>
+                </div>
+            </div>
+
+            <!-- Columna derecha: Datos registrados en el sistema (solo lectura) -->
+            <div class="col-12 col-lg-8">
+                <div class="card tabla-modulo-card">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold"><i class="bi bi-person-vcard me-2"></i> Datos de mi Perfil</h5>
+                        <button type="button" id="btnActualizarPerfil" class="btn btn-sm btn-outline-dark fw-semibold">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Actualizar lista
+                        </button>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-card-heading me-1"></i> Documento</div>
+                                    <div class="dato-perfil-valor" id="datoDocumento">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-person me-1"></i> Nombre completo</div>
+                                    <div class="dato-perfil-valor" id="datoNombreCompleto">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-envelope me-1"></i> Correo electrónico</div>
+                                    <div class="dato-perfil-valor" id="datoEmail">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-telephone me-1"></i> Teléfono</div>
+                                    <div class="dato-perfil-valor" id="datoTelefono">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-cake2 me-1"></i> Fecha de nacimiento</div>
+                                    <div class="dato-perfil-valor" id="datoFechaNacimiento">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-gender-ambiguous me-1"></i> Género</div>
+                                    <div class="dato-perfil-valor" id="datoGenero">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-geo-alt me-1"></i> Ciudad</div>
+                                    <div class="dato-perfil-valor" id="datoCiudad">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dato-perfil-box">
+                                    <div class="dato-perfil-label"><i class="bi bi-house-door me-1"></i> Dirección de residencia</div>
+                                    <div class="dato-perfil-valor" id="datoDireccion">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Controlador/encabezado.js?v=3"></script>
+    <script src="../Controlador/Perfil.js?v=1"></script>
+</body>
+</html>

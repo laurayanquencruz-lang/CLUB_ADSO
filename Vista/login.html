@@ -1,37 +1,78 @@
+<!-- Indica que el documento está escrito en HTML5 -->
 <!DOCTYPE html>
+<!-- Etiqueta raíz de la página en idioma español -->
 <html lang="es">
+    <!-- Cabecera: configuración y enlaces a estilos -->
     <head>
+        <!-- Permite mostrar tildes y la letra ñ correctamente -->
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, incial-scale=1.0">
+        <!-- Ajusta la escala de la página en pantallas móviles y escritorio -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Título que se ve en la pestaña del navegador -->
         <title>MR CLUB</title>
-        <link rel="stylesheet" href="../Assests/estilos.css">
+        <!-- Conecta la hoja de estilos personalizada del proyecto (?v=5 evita caché vieja) -->
+        <link rel="stylesheet" href="../Assests/estilos.css?v=5">
+        <style>
+            /* Fuerza la imagen de fondo del login desde la carpeta Assests */
+            html, body {
+                min-height: 100vh;
+                margin: 0;
+            }
+            body {
+                background-color: #fde2e8 !important;
+                background-image: url("../Assests/fondo-login.jpg?v=2") !important;
+                background-repeat: no-repeat !important;
+                background-position: center center !important;
+                background-size: cover !important;
+                background-attachment: fixed !important;
+            }
+        </style>
     </head>
+    <!-- Cuerpo visible de la página -->
     <body>
+        <!-- Caja contenedora que centra y da estilo al formulario -->
         <div class="contenedor-formulario">
+            <!-- Título principal del formulario -->
             <h2>Inicio de Sesión</h2>
+            <!-- Formulario de login: su envío lo captura login.js y lo manda por POST a iniciar_sesion.php -->
             <form id="formLogin" action="../Modelo/iniciar_sesion.php" method="POST">
                 
+                <!-- Grupo del campo usuario (correo electrónico) -->
                 <div class="grupo-input">
+                    <!-- Etiqueta asociada al input usuario -->
                     <label for="usuario">Usuario:</label>
+                    <!-- Campo de texto obligatorio donde el usuario escribe su correo -->
                     <input id="usuario" name="usuario" type="text" required placeholder="Ingrese su usuario">
                 </div>
 
+                <!-- Grupo del campo contraseña -->
                 <div class="grupo-input">
-                    <label>Contraseña:</label>
+                    <!-- Etiqueta del campo contraseña -->
+                    <label for="contraseña">Contraseña:</label>
+                    <!-- Campo tipo password (oculta los caracteres) y obligatorio -->
                     <input id="contraseña" type="password" name="contraseña" required placeholder="Ingrese su contraseña">
                 </div>
 
+                <!-- Contenedor de los botones del formulario -->
                 <div class="grupo-botones">
+                    <!-- Botón que dispara el envío del formulario (evento submit) -->
                     <button type="submit">Ingresar</button>
+                    <!-- Botón que borra lo escrito en los campos del formulario -->
                     <button type="reset">Limpiar Formulario</button>
                 </div>
-                <div class="registro" style="text-align: center; margin-top: 18px;"></div>
-                <p>¿no tienes cuenta? <a href="Asociados.html" style="font-weight: bold; color:deeppink;"></a></p>
+
+                <!-- Sección de enlace hacia el registro de nuevos usuarios -->
+                <div class="registro" style="text-align: center; margin-top: 18px;">
+                    <!-- Texto y enlace a la vista de asociados -->
+                    <p>¿No tienes cuenta? <a href="../Vista/Asociados.html" style="font-weight: bold; color:deeppink;">Regístrate</a></p>
                 </div>
+
+                <!-- Párrafo donde login.js muestra mensajes de error o éxito al iniciar sesión -->
                 <p id="mensajeLogin" class="text-danger mt-3 mb-0" role="alert"></p>
                 
             </form>
         </div>
+        <!-- Carga el archivo JavaScript que valida y envía las credenciales -->
         <script src="../Controlador/login.js"></script>
     </body>
 </html>

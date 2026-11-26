@@ -1,0 +1,363 @@
+/* Fondo compartido para todas las vistas de Administrador y Asociado */
+body {
+    background-color: #fff8f0 !important;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)), url("fondo-panel.jpg?v=1") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    min-height: 100vh;
+}
+
+/* Tarjetas ligeramente translúcidas y nítidas sobre el fondo */
+.card {
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+}
+
+/* Barra de navegación principal con paleta pastel que combina con el fondo */
+.navbar-gestion {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 224, 236, 0.90) 0%,   /* Rosado Patricio */
+        rgba(255, 245, 204, 0.90) 35%,  /* Amarillo Bob Esponja */
+        rgba(232, 224, 255, 0.90) 68%,  /* Lavanda flores */
+        rgba(212, 243, 239, 0.90) 100%  /* Menta Calamardo */
+    );
+    backdrop-filter: blur(8px);                 /* Efecto vidrio suave sobre el fondo */
+    border-top: 3px solid #d47fa6;              /* Línea superior rosada */
+    border-bottom: 3px solid #6b4e3d;           /* Borde inferior café oscuro como el contorno del dibujo */
+    padding: 0.65rem 1.5rem;
+    box-shadow: 0 4px 14px rgba(107, 78, 61, 0.16);
+}
+
+/* Marca izquierda: ícono de capas + texto GESTIÓN */
+.navbar-gestion .marca-gestion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #5a2842;                             /* Texto ciruela oscuro legible */
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+.navbar-gestion .marca-gestion:hover {
+    color: #8c2455;
+}
+
+/* Color rosado oscuro para el ícono de capas */
+.navbar-gestion .marca-gestion i {
+    color: #b5346d;
+    font-size: 1.35rem;
+}
+
+/* Contenedor de enlaces y botón a la derecha */
+.navbar-gestion .menu-gestion {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+/* Estilo base de cada enlace del menú */
+.navbar-gestion .enlace-gestion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #4f2d3f;                             /* Texto oscuro armonizado con el fondo */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Efecto al pasar el mouse sobre un enlace */
+.navbar-gestion .enlace-gestion:hover {
+    background-color: rgba(255, 255, 255, 0.65);
+    border-color: rgba(156, 43, 93, 0.35);
+    color: #7a1f4a;
+}
+
+/* Estado activo: recuadro claro con borde oscuro que resalta la vista actual */
+.navbar-gestion .enlace-gestion.activo {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 2px solid #9c2b5d;
+    color: #7a1f4a;
+    font-weight: 800;
+}
+
+/* Tamaño de los íconos dentro de cada enlace */
+.navbar-gestion .enlace-gestion i {
+    font-size: 1.05rem;
+}
+
+/* Avatar circular de perfil en el encabezado */
+.navbar-gestion .avatar-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.7rem 0.25rem 0.3rem;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.72);
+    border: 2px solid #9c2b5d;
+    color: #5a2842;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-left: 0.25rem;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.navbar-gestion .avatar-header:hover,
+.navbar-gestion .avatar-header.activo {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #7a1f4a;
+    transform: translateY(-1px);
+}
+
+.navbar-gestion .avatar-header-circulo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ffd6e6;
+    border: 2px solid #9c2b5d;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #9c2b5d;
+    font-size: 1.05rem;
+}
+
+.navbar-gestion .avatar-header-circulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Botón de Cerrar sesión en tono coral-rosado oscuro acorde al fondo */
+.navbar-gestion .btn-cerrar-sesion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: #d94b62;
+    color: #ffffff;
+    border: 2px solid #8f2236;
+    border-radius: 10px;
+    padding: 0.45rem 1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-left: 0.35rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.navbar-gestion .btn-cerrar-sesion:hover {
+    background-color: #b8374d;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Botón hamburguesa oscuro en pantallas pequeñas (contrasta con el fondo pastel) */
+.navbar-gestion .navbar-toggler {
+    border: 2px solid #6b4e3d;
+}
+
+.navbar-gestion .navbar-toggler-icon {
+    filter: none;
+}
+
+/* ==========================================================================
+   Estilos llamativos y coordinados para formularios y tablas de cada módulo
+   ========================================================================== */
+.tabla-modulo-card,
+.form-modulo-card {
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14) !important;
+}
+
+.tabla-modulo-card .table {
+    margin-bottom: 0;
+    --bs-table-bg: transparent;
+}
+
+.tabla-modulo-card .table thead th {
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    border-bottom: none;
+    padding: 0.85rem 0.75rem;
+    white-space: nowrap;
+}
+
+.tabla-modulo-card .table tbody td {
+    padding: 0.75rem;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+/* --- TEMA ROSADO (Asociados - Patricio) --- */
+body.tema-rosa .card {
+    background-color: rgba(255, 240, 246, 0.88);
+    border: 2.5px solid #9c2b5d !important;
+}
+body.tema-rosa .tabla-modulo-card .card-header {
+    background: linear-gradient(90deg, #ffd4e5, #ffeaf2) !important;
+    border-bottom: 2px solid #9c2b5d;
+    color: #801d4a !important;
+}
+body.tema-rosa .tabla-modulo-card .table thead th {
+    background-color: #9c2b5d !important;
+}
+body.tema-rosa .tabla-modulo-card .table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 247, 250, 0.85);
+}
+body.tema-rosa .tabla-modulo-card .table tbody tr:nth-child(even) {
+    background-color: rgba(255, 228, 239, 0.85);
+}
+body.tema-rosa .tabla-modulo-card .table tbody tr:hover {
+    background-color: rgba(255, 206, 226, 0.95);
+}
+body.tema-rosa .tabla-modulo-card .table tbody td {
+    color: #4d1930;
+    border-color: rgba(156, 43, 93, 0.22);
+}
+
+/* --- TEMA AMARILLO CÁLIDO (Actividades - Bob Esponja) --- */
+body.tema-amarillo .card {
+    background-color: rgba(255, 250, 224, 0.88);
+    border: 2.5px solid #9a6500 !important;
+}
+body.tema-amarillo .form-modulo-card .card-header {
+    background: linear-gradient(90deg, #c78600, #e0a100) !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #9a6500;
+}
+body.tema-amarillo .tabla-modulo-card .card-header {
+    background: linear-gradient(90deg, #ffec9e, #fff6cf) !important;
+    border-bottom: 2px solid #9a6500;
+    color: #7a4e00 !important;
+}
+body.tema-amarillo .tabla-modulo-card .card-header h5 {
+    color: #7a4e00 !important;
+}
+body.tema-amarillo .tabla-modulo-card .table thead th {
+    background-color: #b57600 !important;
+}
+body.tema-amarillo .tabla-modulo-card .table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 253, 240, 0.88);
+}
+body.tema-amarillo .tabla-modulo-card .table tbody tr:nth-child(even) {
+    background-color: rgba(255, 243, 196, 0.85);
+}
+body.tema-amarillo .tabla-modulo-card .table tbody tr:hover {
+    background-color: rgba(255, 231, 145, 0.95);
+}
+body.tema-amarillo .tabla-modulo-card .table tbody td {
+    color: #4a3200;
+    border-color: rgba(154, 101, 0, 0.22);
+}
+body.tema-amarillo #btnGuardarActividad {
+    background-color: #b57600;
+    border-color: #8f5c00;
+    color: #ffffff;
+    font-weight: 700;
+}
+body.tema-amarillo #btnGuardarActividad:hover {
+    background-color: #946000;
+}
+
+/* --- TEMA LILA / MORADO (Préstamos - Flores Lavanda) --- */
+body.tema-lila .card {
+    background-color: rgba(242, 237, 255, 0.88);
+    border: 2.5px solid #5a3894 !important;
+}
+body.tema-lila .form-modulo-card .card-header {
+    background: linear-gradient(90deg, #5a3894, #7c56bd) !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #452678;
+}
+body.tema-lila .form-modulo-card .card-header a {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+}
+body.tema-lila .tabla-modulo-card .card-header {
+    background: linear-gradient(90deg, #dfd2ff, #efe9ff) !important;
+    border-bottom: 2px solid #5a3894;
+}
+body.tema-lila .tabla-modulo-card .card-header h5 {
+    color: #452678 !important;
+}
+body.tema-lila .tabla-modulo-card .table thead th {
+    background-color: #653fa8 !important;
+}
+body.tema-lila .tabla-modulo-card .table tbody tr:nth-child(odd) {
+    background-color: rgba(250, 248, 255, 0.88);
+}
+body.tema-lila .tabla-modulo-card .table tbody tr:nth-child(even) {
+    background-color: rgba(233, 224, 255, 0.85);
+}
+body.tema-lila .tabla-modulo-card .table tbody tr:hover {
+    background-color: rgba(217, 203, 255, 0.95);
+}
+body.tema-lila .tabla-modulo-card .table tbody td {
+    color: #321d59;
+    border-color: rgba(90, 56, 148, 0.22);
+}
+body.tema-lila #btnGuardarPrestamo {
+    background-color: #653fa8;
+    border-color: #4a2a82;
+    color: #ffffff !important;
+}
+body.tema-lila #btnGuardarPrestamo:hover {
+    background-color: #502e8c;
+}
+
+/* --- TEMA MENTA / TURQUESA (Pagos - Calamardo) --- */
+body.tema-menta .card {
+    background-color: rgba(228, 248, 245, 0.88);
+    border: 2.5px solid #1b6b66 !important;
+}
+body.tema-menta .form-modulo-card .card-header {
+    background: linear-gradient(90deg, #176963, #238c84) !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #12524d;
+}
+body.tema-menta .tabla-modulo-card .card-header {
+    background: linear-gradient(90deg, #bfeee8, #e0f8f5) !important;
+    border-bottom: 2px solid #1b6b66;
+}
+body.tema-menta .tabla-modulo-card .card-header h5 {
+    color: #114f4b !important;
+}
+body.tema-menta .tabla-modulo-card .table thead th {
+    background-color: #1b6b66 !important;
+}
+body.tema-menta .tabla-modulo-card .table tbody tr:nth-child(odd) {
+    background-color: rgba(244, 252, 251, 0.88);
+}
+body.tema-menta .tabla-modulo-card .table tbody tr:nth-child(even) {
+    background-color: rgba(217, 245, 241, 0.85);
+}
+body.tema-menta .tabla-modulo-card .table tbody tr:hover {
+    background-color: rgba(190, 236, 230, 0.95);
+}
+body.tema-menta .tabla-modulo-card .table tbody td {
+    color: #123d3a;
+    border-color: rgba(27, 107, 102, 0.22);
+}
+body.tema-menta #btnGuardarPago {
+    background-color: #1b6b66;
+    border-color: #12524d;
+    color: #ffffff;
+    font-weight: 700;
+}
+body.tema-menta #btnGuardarPago:hover {
+    background-color: #145450;
+}

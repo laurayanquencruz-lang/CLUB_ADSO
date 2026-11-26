@@ -1,0 +1,8 @@
+# Evita que el navegador (Chrome/Brave) muestre copias viejas en caché de HTML, JS y CSS
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|htm|js|css|php|jpg|jpeg|png|gif|webp)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>

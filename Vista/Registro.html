@@ -4,112 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Registro de Asociados - MR CLUB</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../Assests/encabezado.css?v=3">
+    <title>Gestión de Asociados - MR CLUB</title>
     <style>
         body { background-color: #f8f9fa; }
         .titulo { color: #da106b; }
-        .btn-primario { background-color: #e30e72; color: black; }
-        .btn-primario:hover { background-color: #e93bc0; color: white; }
-        .btn-secundario { background-color: #db1284; color: #222; }
-        .btn-secundario:hover { background-color: #d651ac; }
+        .btn-primario { background-color: #e30e72; color: white; border: none; }
+        .btn-primario:hover { background-color: #b80b5b; color: white; }
+        .btn-secundario { background-color: #6c757d; color: white; border: none; }
+        .btn-secundario:hover { background-color: #5c636a; color: white; }
     </style>
 </head>
-<body class="py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <h2 class="text-center mb-4 fw-bold titulo">Registro de Asociados</h2>
-                        
-                        <form id="formRegistroAsociado" action="../Modelo/GuardarAsociado.php" method="POST"> 
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Documento de Identidad</label>
-                                <input type="number" id="documento" name="Documento" class="form-control" required placeholder="Ej: 1058354573">
-                            </div>
+<body class="tema-rosa">
+    <!-- Encabezado compartido adaptado al rol (Administrador o Asociado) -->
+    <div id="encabezado-app"></div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-semibold">Nombres</label>
+    <div class="container-fluid px-4 py-4">
+        <div class="row g-4 align-items-start">
+            <!-- Columna izquierda: formulario vertical de registro y edición de asociados -->
+            <div class="col-12 col-lg-4" id="contenedorFormAsociado">
+                <div class="card form-modulo-card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0 fw-bold titulo" id="tituloFormAsociado">Registro de Asociados</h4>
+                            <a href="dashboard.html" class="text-decoration-none fw-semibold small" style="color: #b37575;">← Panel</a>
+                        </div>
+
+                        <form id="formRegistroAsociado" action="../Modelo/gestionAsociados.php" method="POST">
+                            <input type="hidden" id="idAsociado" name="idAsociado">
+
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="documento">Documento de Identidad</label>
+                                    <input type="number" id="documento" name="Documento" class="form-control" required placeholder="Ej: 1058354573">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="nombres">Nombres</label>
                                     <input type="text" id="nombres" name="Nombre" class="form-control" required placeholder="Nombres completos">
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-semibold">Apellidos</label>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="apellidos">Apellidos</label>
                                     <input type="text" id="apellidos" name="Apellido" class="form-control" required placeholder="Apellidos completos">
                                 </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Fecha de Nacimiento</label>
-                                <input type="date" id="fechaNacimiento" name="Fecha_Nacimiento"   class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Dirección de Residencia</label>
-                                <input type="text" id="direccion" name="Direccion_Residencia" class="form-control" required placeholder="Ej: Cra 25 # 11-105">
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-semibold">Teléfono</label>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="fechaNacimiento">Fecha de Nacimiento</label>
+                                    <input type="date" id="fechaNacimiento" name="Fecha_Nacimiento" class="form-control" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="direccion">Dirección de Residencia</label>
+                                    <input type="text" id="direccion" name="Direccion_Residencia" class="form-control" required placeholder="Ej: Cra 25 # 11-105">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="telefono">Teléfono</label>
                                     <input type="tel" id="telefono" name="Telefono" class="form-control" required placeholder="Ej: 3225817510">
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-semibold">Ciudad</label>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="ciudad">Ciudad</label>
                                     <select id="ciudad" name="Ciudad" class="form-select" required>
                                         <option value="">Seleccione una ciudad</option>
-                                        <option>Duitama</option>
-                                        <option>Sogamoso</option>
-                                        <option>Tunja</option>
+                                        <option value="Duitama">Duitama</option>
+                                        <option value="Sogamoso">Sogamoso</option>
+                                        <option value="Tunja">Tunja</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Correo Electrónico</label>
-                                <input type="email" id="correo" name="Email" class="form-control" required placeholder="correo@ejemplo.com">
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold">Género</label>
-                                <div class="d-flex gap-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Genero" id="FEMENINO" value="FEMENINO" required>
-                                        <label class="form-check-label" for="FEMENINO">Femenino</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Genero" id="MASCULINO" value="MASCULINO">
-                                        <label class="form-check-label" for="MASCULINO">Masculino</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Genero" id="OTRO" value="OTRO">
-                                        <label class="form-check-label" for="OTRO">Otro</label>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="correo">Correo Electrónico</label>
+                                    <input type="email" id="correo" name="Email" class="form-control" required placeholder="correo@ejemplo.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold d-block">Género</label>
+                                    <div class="d-flex gap-3 pt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Genero" id="FEMENINO" value="FEMENINO" required>
+                                            <label class="form-check-label" for="FEMENINO">Femenino</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Genero" id="MASCULINO" value="MASCULINO">
+                                            <label class="form-check-label" for="MASCULINO">Masculino</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Genero" id="OTRO" value="OTRO">
+                                            <label class="form-check-label" for="OTRO">Otro</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Contraseña</label>
-                                <input type="password" id="contraseña" name="Contraseña" class="form-control" required placeholder="Ingrese su contraseña">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Confirmar Contraseña</label>
-                                <input type="password" id="confirmarContraseña" name="ConfirmarContraseña" class="form-control" required placeholder="Confirme su contraseña">
-                            </div>
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-primario flex-grow-1">Guardar</button>
-                                <button type="reset" class="btn btn-secundario flex-grow-1">Limpiar</button>
-                            </div>
-                            <p id="mensajeRegistro" role="status" aria-live="polite"></p>
-                        </form>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="rolAsociado">Rol</label>
+                                    <select id="rolAsociado" name="rol" class="form-select">
+                                        <option value="Asociado">Asociado</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="contraseña">Contraseña</label>
+                                    <input type="password" id="contraseña" name="Contraseña" class="form-control" required placeholder="Ingrese su contraseña">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="confirmarContraseña">Confirmar Contraseña</label>
+                                    <input type="password" id="confirmarContraseña" name="ConfirmarContraseña" class="form-control" required placeholder="Confirme su contraseña">
+                                </div>
 
-                        <div class="mt-4 text-center">
-                            <a href="dashboard.html" class="text-decoration-none" style="color: #b37575;">← Volver al Panel</a>
+                                <div class="col-12">
+                                    <div id="mensajeRegistro" class="d-none alert mb-0 fw-semibold" role="status" aria-live="polite"></div>
+                                </div>
+
+                                <div class="col-12 d-grid gap-2 mt-2">
+                                    <button type="submit" id="btnGuardarAsociado" class="btn btn-primario py-2 fw-semibold">
+                                        <i class="bi bi-person-plus me-1"></i> Guardar Asociado
+                                    </button>
+                                    <button type="button" id="btnCancelarAsociado" class="btn btn-secundario py-2 d-none">
+                                        <i class="bi bi-x-circle me-1"></i> Cancelar edición
+                                    </button>
+                                    <button type="reset" id="btnLimpiarAsociado" class="btn btn-outline-secondary py-2">Limpiar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha: tabla de asociados guardados -->
+            <div class="col-12 col-lg-8" id="contenedorTablaAsociado">
+                <div class="card tabla-modulo-card shadow-sm border-0">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold titulo"><i class="bi bi-people me-2"></i> Asociados Registrados</h5>
+                        <button type="button" id="btnRecargarAsociados" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-arrow-clockwise me-1"></i> Actualizar lista
+                        </button>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Nombre</th>
+                                        <th>Ciudad</th>
+                                        <th>Teléfono</th>
+                                        <th>Correo</th>
+                                        <th>Rol</th>
+                                        <th id="colAccionesAsociados" class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaAsociados">
+                                    <tr>
+                                        <td colspan="7" class="text-center py-4 text-muted">Cargando asociados...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Controlador/encabezado.js?v=2"></script>
+    <script src="../Controlador/Asociado.js?v=3"></script>
 </body>
-<script src="../Controlador/Asociado.js"></script>
 </html>
